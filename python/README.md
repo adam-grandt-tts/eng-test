@@ -41,20 +41,20 @@ from datetime import datetime, timedelta
 from nws_api import NWSWeatherAPI
 from nws_utils import parse_forecast, parse_observation, parse_alert
 
-    api = NWSWeatherAPI(user_agent="MyWeatherApp/1.0 (your@email.com)")
-    
-    # Washington, DC coordinates
-    lat, lon = 38.8951, -77.0364
-    
-    # Get forecast data
-    forecast_data = api.get_forecast(lat, lon)
-    assert forecast_data["properties"]["elevation"]["value"] ==  6.096
-    
-    # Parse the forecast data
-    forecast = parse_forecast(forecast_data)
-    
-    # Print forecast information
-    print(f"Forecast updated: {forecast.updated}")
-    print(f"Today: {forecast.today.name} - {forecast.today.short_forecast}")    
+api = NWSWeatherAPI(user_agent="MyWeatherApp/1.0 (your@email.com)")
+
+# Washington, DC coordinates
+lat, lon = 38.8951, -77.0364
+
+# Get forecast data
+forecast_data = api.get_forecast(lat, lon)
+assert forecast_data["properties"]["elevation"]["value"] ==  6.096
+
+# Parse the forecast data
+forecast = parse_forecast(forecast_data)
+
+# Print forecast information
+print(f"Forecast updated: {forecast.updated}")
+print(f"Today: {forecast.today.name} - {forecast.today.short_forecast}")    
 
 ```
