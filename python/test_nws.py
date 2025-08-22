@@ -587,7 +587,3 @@ class TestNWSWeatherAPI:
         forecast = parse_forecast(forecast_data)
         assert isinstance(forecast, Forecast)
 
-        
-        # # Print forecast information
-        # print(f"Forecast updated: {forecast.updated}")
-        # print(f"Today: {forecast.today.name} - {forecast.today.short_forecast}")    

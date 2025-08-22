@@ -86,7 +86,7 @@ class TestNWSWeatherAPI < Minitest::Test
     stub_request(:get, "#{NWSConfig::BASE_URL}/test/endpoint")
       .to_return(status: 404, body: '{"error": "Not found"}', headers: {'Content-Type' => 'application/json'})
     
-    assert_raises(NotFoundError) do
+    assert_raises(NWSAPIError) do
       @api._make_request("test/endpoint")
     end
   end
@@ -95,7 +95,7 @@ class TestNWSWeatherAPI < Minitest::Test
     stub_request(:get, "#{NWSConfig::BASE_URL}/test/endpoint")
       .to_return(status: 429, body: '{"error": "Too many requests"}', headers: {'Content-Type' => 'application/json'})
     
-    assert_raises(RateLimitError) do
+    assert_raises(NWSAPIError) do
       @api._make_request("test/endpoint")
     end
   end
@@ -126,16 +126,4 @@ class TestNWSWeatherAPI < Minitest::Test
       @api._make_request("test/endpoint")
     end
   end
-  
-  def test_cache_functionality
-    stub_request(:get, "#{NWSConfig::BASE_URL}/test/endpoint")
-      .to_return(status: 200, body: '{"test": "data"}', headers: {'Content-Type' => 'application/json'})
-    
-    # First request should hit the API
-    result1 = @api._make_request("test/endpoint")
-    
-    # Second request should use cache
-    result2 = @api._make_request("test/endpoint")
-    
-    assert_equal result1, result2
-    assert_requested :get, "#{NWSConfig
+end

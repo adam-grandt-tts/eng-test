@@ -17,7 +17,7 @@ class NWSConfig
   BASE_URL = ENV['NWS_BASE_URL'] || 'https://api.weather.gov'
   USER_EMAIL = ENV['NWS_USER_EMAIL']
   USER_AGENT = ENV['NWS_USER_AGENT'] || 'RubyNWSAPIWrapper/1.0'
-  USER_AGENT_STR = "#{USER_AGENT} (#{USER_EMAIL || USER_AGENT})"
+  USER_AGENT_STR = "#{USER_AGENT} (#{USER_EMAIL})"
   CACHE_EXPIRY = (ENV['NWS_CACHE_EXPIRY'] || '600').to_i  # 10 minutes default
   TIMEOUT = (ENV['NWS_TIMEOUT'] || '10').to_i  # 10 seconds default
 end
@@ -63,9 +63,6 @@ end
 
 # Base exception for NWS API errors
 class NWSAPIError < StandardError; end
-
-# Raised when a resource is not found
-class NotFoundError < NWSAPIError; end
 
 # Raised when the API rate limit is exceeded
 class RateLimitError < NWSAPIError; end
@@ -134,7 +131,7 @@ class NWSWeatherAPI
         @cache.set(cache_key, data, @cache_expiry)
         return data
       when 404
-        raise NotFoundError, "Resource not found: #{url}"
+        raise NWSAPIError, "Resource not found: #{url}"
       when 429
         raise RateLimitError, "API rate limit exceeded"
       else
@@ -178,7 +175,7 @@ class NWSWeatherAPI
                    end
     
     unless forecast_url
-      raise NotFoundError, "Forecast URL not found in points response"
+      raise NWSAPIError, "Forecast URL not found in points response"
     end
     
     # The forecast URL is a full URL, so we need to extract just the endpoint
