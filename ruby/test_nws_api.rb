@@ -1,7 +1,9 @@
+require 'json'
 require 'minitest/autorun'
 require 'webmock/minitest'
 require_relative 'nws_api'
 require_relative 'nws_utils'
+
 
 class TestNWSCache < Minitest::Test
   def setup
