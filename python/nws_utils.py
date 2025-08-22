@@ -193,11 +193,7 @@ def get_coordinates_from_address(address: str) -> Optional[Coordinates]:
     try:
         # This is a placeholder. In a real implementation, you would use a geocoding service
         # like Google Maps, Nominatim, or similar.
-        # For example, with geopy:
-        # from geopy.geocoders import Nominatim
-        # geolocator = Nominatim(user_agent="nws_api_wrapper")
-        # location = geolocator.geocode(address)
-        # return Coordinates(latitude=location.latitude, longitude=location.longitude)
+
         
         # For now, return None to indicate that geocoding is not implemented
         return None

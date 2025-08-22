@@ -166,12 +166,6 @@ module NWSUtils
     begin
       # This is a placeholder. In a real implementation, you would use a geocoding service
       # like Google Maps, Nominatim, or similar.
-      # For example, with the geocoder gem:
-      # require 'geocoder'
-      # result = Geocoder.search(address).first
-      # return Coordinates.new(latitude: result.latitude, longitude: result.longitude) if result
-      
-      # For now, return nil to indicate that geocoding is not implemented
       nil
     rescue => e
       nil
