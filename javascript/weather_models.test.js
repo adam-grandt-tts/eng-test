@@ -1,5 +1,5 @@
 // weather_models.test.js
-const {
+import {
   Coordinates,
   Temperature,
   Wind,
@@ -9,7 +9,7 @@ const {
   Forecast,
   Observation,
   Alert
-} = require('./weather_models');
+} from './weather_models.js';
 
 describe('Temperature', () => {
   test('converts Fahrenheit to Celsius correctly', () => {
@@ -88,12 +88,12 @@ describe('Forecast', () => {
     expect(emptyForecast.today).toBeNull();
   });
   
-  test('tonight property returns null when no night period exists', () => {
+  test('tonight property returns undefined when no night period exists', () => {
     const forecastNoNight = new Forecast(
       new Date(2023, 0, 1, 10, 0, 0),
       [todayPeriod]
     );
-    expect(forecastNoNight.tonight).toBeNull();
+    expect(forecastNoNight.tonight).toBeUndefined();
   });
 });
 

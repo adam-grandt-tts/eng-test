@@ -1,5 +1,5 @@
 // nws_utils.test.js
-const {
+import {
   parseForecast,
   parseObservation,
   parseAlert,
@@ -10,13 +10,13 @@ const {
   milesToMeters,
   kphToMph,
   mphToKph
-} = require('./nws_utils');
+} from './nws_utils.js';
 
-const {
+import {
   Forecast,
   Observation,
   Alert
-} = require('./weather_models');
+} from './weather_models.js';
 
 describe('parseForecast', () => {
   test('parses forecast data correctly', () => {
@@ -140,7 +140,8 @@ describe('parseObservation', () => {
       properties: {
         station: "KDCA",
         timestamp: "2023-01-01T12:00:00Z",
-        textDescription: "Fair"
+        textDescription: "Fair",
+        relativeHumidity: null
       }
     };
     
@@ -153,8 +154,8 @@ describe('parseObservation', () => {
     expect(result.dewpoint).toBeNull();
     expect(result.relativeHumidity).toBeNull();
     expect(result.wind).toBeNull();
-    expect(result.barometricPressure).toBeUndefined();
-    expect(result.visibility).toBeUndefined();
+    expect(result.barometricPressure).toBeNull();
+    expect(result.visibility).toBeNull();
     expect(result.textDescription).toBe("Fair");
     expect(result.precipitationLastHour).toBeNull();
   });

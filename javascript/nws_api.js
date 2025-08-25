@@ -1,10 +1,10 @@
 // nws_api.js
-const axios = require('axios');
-const axiosRetry = require('axios-retry');
-const { v4: uuidv4 } = require('uuid');
+import axios from 'axios';
+import axiosRetry from 'axios-retry';
+
 
 // Configure logging
-const winston = require('winston');
+import winston from 'winston';
 const logger = winston.createLogger({
   level: 'info',
   format: winston.format.combine(
@@ -115,7 +115,7 @@ class ValidationError extends NWSAPIError {
   }
 }
 
-class NWSWeatherAPI {
+export class NWSWeatherAPI {
   /**
    * Initialize the NWS API client.
    * @param {string} userAgent - User agent string for API requests
@@ -493,13 +493,3 @@ class NWSWeatherAPI {
   }
 }
 
-module.exports = {
-  NWSConfig,
-  NWSCache,
-  NWSAPIError,
-  NotFoundError,
-  RateLimitError,
-  TimeoutError,
-  ValidationError,
-  NWSWeatherAPI
-};

@@ -1,12 +1,12 @@
 // weather_models.js
-class Coordinates {
+export class Coordinates {
   constructor(latitude, longitude) {
     this.latitude = latitude;
     this.longitude = longitude;
   }
 }
 
-class Temperature {
+export class Temperature {
   constructor(value, unit) {
     this.value = value;
     this.unit = unit;
@@ -27,7 +27,7 @@ class Temperature {
   }
 }
 
-class Wind {
+export class Wind {
   constructor(speed, direction, unit) {
     this.speed = speed;
     this.direction = direction;
@@ -35,7 +35,7 @@ class Wind {
   }
 }
 
-class Precipitation {
+export class Precipitation {
   constructor(value, type, unit) {
     this.value = value;
     this.type = type;
@@ -43,14 +43,14 @@ class Precipitation {
   }
 }
 
-class WeatherCondition {
+export class WeatherCondition {
   constructor(description, icon = null) {
     this.description = description;
     this.icon = icon;
   }
 }
 
-class ForecastPeriod {
+export class ForecastPeriod {
   constructor(name, startTime, endTime, temperature, wind, shortForecast, 
               detailedForecast, icon = null, precipitationProbability = null) {
     this.name = name;
@@ -65,7 +65,7 @@ class ForecastPeriod {
   }
 }
 
-class Forecast {
+export class Forecast {
   constructor(updated, periods) {
     this.updated = updated;
     this.periods = periods;
@@ -86,7 +86,7 @@ class Forecast {
   }
 }
 
-class Observation {
+export class Observation {
   constructor(station, timestamp, temperature = null, dewpoint = null, 
               relativeHumidity = null, wind = null, barometricPressure = null, 
               visibility = null, textDescription = null, precipitationLastHour = null) {
@@ -103,7 +103,7 @@ class Observation {
   }
 }
 
-class Alert {
+export class Alert {
   constructor(id, event, headline, description, instruction, severity, certainty, 
               urgency, sent, effective, onset, expires, ends, status, messageType, 
               category, responseType, affectedZones, affectedCounties) {
@@ -129,14 +129,3 @@ class Alert {
   }
 }
 
-module.exports = {
-  Coordinates,
-  Temperature,
-  Wind,
-  Precipitation,
-  WeatherCondition,
-  ForecastPeriod,
-  Forecast,
-  Observation,
-  Alert
-};

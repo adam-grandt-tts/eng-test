@@ -1,16 +1,16 @@
 // nws_utils.js
-const { 
+import  { 
   Coordinates, Temperature, Wind, Precipitation, 
   WeatherCondition, ForecastPeriod, Forecast, 
   Observation, Alert 
-} = require('./weather_models');
+} from './src/weather_models.js';
 
 /**
  * Parse raw forecast data into a Forecast object.
  * @param {Object} forecastData - Raw forecast data from the API.
  * @returns {Forecast} Parsed forecast object.
  */
-function parseForecast(forecastData) {
+export function parseForecast(forecastData) {
   const properties = forecastData.properties || {};
   let updated = properties.updated || "";
   if (updated) {
@@ -60,7 +60,7 @@ function parseForecast(forecastData) {
  * @param {Object} observationData - Raw observation data from the API.
  * @returns {Observation} Parsed observation object.
  */
-function parseObservation(observationData) {
+export function parseObservation(observationData) {
   const properties = observationData.properties || {};
   
   const station = properties.station || "";
@@ -126,7 +126,7 @@ function parseObservation(observationData) {
  * @param {Object} alertData - Raw alert data from the API.
  * @returns {Alert} Parsed alert object.
  */
-function parseAlert(alertData) {
+export function parseAlert(alertData) {
   const properties = alertData.properties || {};
   
   // Parse timestamps
@@ -181,7 +181,7 @@ function parseAlert(alertData) {
  * @param {string} address - Address to geocode.
  * @returns {Coordinates|null} Coordinates for the address, or null if geocoding failed.
  */
-function getCoordinatesFromAddress(address) {
+export function getCoordinatesFromAddress(address) {
   try {
     // This is a placeholder. In a real implementation, you would use a geocoding service
     // like Google Maps, Nominatim, or similar.
@@ -198,7 +198,7 @@ function getCoordinatesFromAddress(address) {
  * @param {number} celsius - Temperature in Celsius.
  * @returns {number} Temperature in Fahrenheit.
  */
-function celsiusToFahrenheit(celsius) {
+export function celsiusToFahrenheit(celsius) {
   return (celsius * 9/5) + 32;
 }
 
@@ -207,7 +207,7 @@ function celsiusToFahrenheit(celsius) {
  * @param {number} fahrenheit - Temperature in Fahrenheit.
  * @returns {number} Temperature in Celsius.
  */
-function fahrenheitToCelsius(fahrenheit) {
+export function fahrenheitToCelsius(fahrenheit) {
   return (fahrenheit - 32) * 5/9;
 }
 
@@ -216,7 +216,7 @@ function fahrenheitToCelsius(fahrenheit) {
  * @param {number} meters - Distance in meters.
  * @returns {number} Distance in miles.
  */
-function metersToMiles(meters) {
+export function metersToMiles(meters) {
   return meters / 1609.344;
 }
 
@@ -225,7 +225,7 @@ function metersToMiles(meters) {
  * @param {number} miles - Distance in miles.
  * @returns {number} Distance in meters.
  */
-function milesToMeters(miles) {
+export function milesToMeters(miles) {
   return miles * 1609.344;
 }
 
@@ -234,7 +234,7 @@ function milesToMeters(miles) {
  * @param {number} kph - Speed in kilometers per hour.
  * @returns {number} Speed in miles per hour.
  */
-function kphToMph(kph) {
+export function kphToMph(kph) {
   return kph * 0.621371;
 }
 
@@ -243,19 +243,6 @@ function kphToMph(kph) {
  * @param {number} mph - Speed in miles per hour.
  * @returns {number} Speed in kilometers per hour.
  */
-function mphToKph(mph) {
+export function mphToKph(mph) {
   return mph * 1.60934;
 }
-
-module.exports = {
-  parseForecast,
-  parseObservation,
-  parseAlert,
-  getCoordinatesFromAddress,
-  celsiusToFahrenheit,
-  fahrenheitToCelsius,
-  metersToMiles,
-  milesToMeters,
-  kphToMph,
-  mphToKph
-};

@@ -1,8 +1,6 @@
 // nws_api.test.js
-const axios = require('axios');
-const MockAdapter = require('axios-mock-adapter');
 
-const {
+import  {
   NWSWeatherAPI,
   NWSCache,
   NWSConfig,
@@ -11,10 +9,22 @@ const {
   RateLimitError,
   TimeoutError,
   ValidationError
-} = require('./nws_api');
+} from './nws_api.js';
 
 // Mock axios for testing
-jest.mock('axios');
+// jest.mock('axios');
+
+// Example Jest mock for axios
+    jest.mock('axios', () => ({
+      create: jest.fn(() => ({
+        get: jest.fn(),
+        post: jest.fn(),
+        interceptors: {
+          request: { use: jest.fn(), eject: jest.fn() },
+          response: { use: jest.fn(), eject: jest.fn() },
+        },
+      })),
+    }));
 
 describe('NWSCache', () => {
   let cache;
@@ -85,10 +95,12 @@ describe('NWSWeatherAPI', () => {
     jest.spyOn(api.cache, 'set');
   });
   
-  afterEach(() => {
-    mock.restore();
-    jest.restoreAllMocks();
-  });
+  // afterEach(() => {
+  //   if (typeof mock !== 'undefined') {
+  //     mock.restore();
+  //   }
+  //   jest.restoreAllMocks();
+  // });
   
   test('initialization with custom values', () => {
     const customApi = new NWSWeatherAPI(
